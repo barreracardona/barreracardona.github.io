@@ -3,32 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desacuerdos Constructivos - LaTeX Font Stack (Fixed)</title>
+    <title>Desacuerdos Constructivos - True LaTeX Font Stack</title>
     
-    <!-- Import Alegreya Sans and Inconsolata (zi4) securely via Google Fonts CDN -->
-    <link rel="stylesheet" href="https://googleapis.com">
-
+    <!-- CORS-Compliant CDN Delivery for your exact LaTeX package configurations -->
     <style>
-        /* CRITICAL FIX: Explicitly target the oldstyle figures font file provided by Edward Tufte */
+        /* \usepackage[p,sups,osf]{ETbb} - Exact CTAN TrueType Fonts compilation */
         @font-face {
             font-family: 'ETbb';
-            src: url('https://github.io') format('woff'),
-                 url('https://github.io') format('truetype');
+            src: url('https://jsdelivr.net') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
         @font-face {
             font-family: 'ETbb';
-            src: url('https://github.io') format('woff'),
-                 url('https://github.io') format('truetype');
+            src: url('https://jsdelivr.net') format('truetype');
             font-weight: normal;
             font-style: italic;
         }
+        @font-face {
+            font-family: 'ETbb';
+            src: url('https://jsdelivr.net') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
 
-        /* Core Document Layout styling */
+        /* \usepackage[type1,proportional,oldstyle,scale=.97]{AlegreyaSans} */
+        @font-face {
+            font-family: 'Alegreya Sans';
+            src: url('https://jsdelivr.net') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Alegreya Sans';
+            src: url('https://jsdelivr.net') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* \usepackage[varqu,varl]{zi4} - Inconsolata CTAN Source */
+        @font-face {
+            font-family: 'zi4';
+            src: url('https://jsdelivr.net') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Core Document Layout Styling */
         body {
-            font-family: 'ETbb', Garamond, serif;
-            font-size: 1.15rem;
+            font-family: 'ETbb', serif;
+            font-size: 1.15rem; 
             line-height: 1.65;
             color: #222222;
             max-width: 660px;
@@ -36,20 +60,28 @@
             padding: 0 24px;
             background-color: #ffffff;
             -webkit-font-smoothing: antialiased;
+
+            /* Matches LaTeX [osf]: Instructs ETbb to swap lining figures for oldstyle figures */
+            font-variant-numeric: oldstyle-nums proportional-nums !important;
+            font-feature-settings: "onum" 1, "pnum" 1 !important;
         }
 
-        /* CRITICAL FIX: Forces Alegreya Sans to strictly apply on headers and metadata blocks */
+        /* Appying \usepackage{AlegreyaSans} to your titles and bibliographies */
         h2, .sans-serif-title, .sans-serif-text {
             font-family: 'Alegreya Sans', sans-serif !important;
             font-weight: 700;
             color: #111111;
+            /* Resets sans-serif layout numbers to follow Alegreya's native setup */
+            font-variant-numeric: oldstyle-nums proportional-nums !important;
+            font-feature-settings: "onum" 1, "pnum" 1 !important;
         }
 
         .sans-serif-title {
-            font-size: 1.8rem;
+            font-size: 1.85rem;
             margin-bottom: 25px;
             border-bottom: 1px solid #eeeeee;
             padding-bottom: 8px;
+            letter-spacing: -0.01em;
         }
 
         p {
@@ -67,14 +99,17 @@
             quotes: "«" "»" "“" "”";
         }
 
-        /* Typewriter text: Replicating \usepackage[varqu,varl]{zi4} (Inconsolata) */
+        /* Typewriter text matching \usepackage[varqu,varl]{zi4} */
         code, pre, .tt-url {
-            font-family: 'Inconsolata', monospace;
+            font-family: 'zi4', monospace !important;
             font-size: 0.95em;
             background-color: #f7f7f7;
-            padding: 1px 4px;
+            padding: 2px 5px;
             border-radius: 3px;
             word-break: break-all;
+            /* Overrides body [osf] layout to preserve clean lining figures inside monospaced fragments */
+            font-variant-numeric: tabular-nums lining-nums !important;
+            font-feature-settings: "tnum" 1, "lnum" 1, "onum" 0 !important;
         }
 
         /* Typography spacing rules for small caps (\textlssc) */
@@ -87,13 +122,10 @@
             text-transform: lowercase;
         }
 
-        /* In-text citation formatting */
         .citation {
             color: #222222;
-            margin-left: 1px;
         }
 
-        /* Footnote references pointer */
         .footnote-ref {
             text-decoration: none;
             vertical-align: super;
@@ -114,7 +146,7 @@
         }
 
         .footnotes-section {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             color: #444444;
             line-height: 1.6;
             margin-bottom: 50px;
@@ -134,15 +166,27 @@
             font-size: 0.95em;
             margin-left: 6px;
         }
-        
-        .back-link:hover {
-            text-decoration: underline;
+
+        /* Chicago Author-Date Bibliography Layout */
+        .bibliography-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 22px;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 5px;
+        }
+
+        .bib-entry {
+            font-size: 1.1rem;
+            padding-left: 2.2em;
+            text-indent: -2.2em;
+            margin-bottom: 16px;
+            text-align: justify;
         }
     </style>
 </head>
 <body>
 
-    <!-- Sans Serif Header to instantly verify Alegreya Sans loading -->
+    <!-- Header utilizing true Alegreya Sans compiled fonts -->
     <h2 class="sans-serif-title">Desacuerdos Constructivos</h2>
 
     <p>El verdadero problema no está en la existencia de los desacuerdos, como sí en el modo en que los abordamos (y los supuestos, a menudo falsos, sobre los que actuamos durante esos momentos). Minson quisiera equiparnos con las herramientas prácticas (¡basadas en la evidencia!) que son útiles para tener lo que denomina <q>desacuerdos constructivos</q>, es decir, desacuerdos en que las partes involucradas se marchan con una mayor disposición a hablarse de nuevo <span class="citation">(Minson 2026, <span class="small-caps lowercase-sc">xxv</span>)</span>. Dichas herramientas se subsumen en lo que Minson llama <q>receptividad a opiniones contrarias</q>. Define este constructo como <q>la disposición a acceder, considerar y evaluar los puntos de vista tanto en favor como en contra de algún asunto, de una manera imparcial</q> <span class="citation">(Minson 2026, 21)</span>.<a href="#nota1" id="ref1" class="footnote-ref">1</a></p>
@@ -161,7 +205,7 @@
 
     <!-- Bibliography Section -->
     <div class="bibliography-section">
-        <h2 class="sans-serif-text" style="font-size: 1.45rem; margin-bottom: 22px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;">Referencias</h2>
+        <h2 class="sans-serif-text">Referencias</h2>
         <div class="bib-entry">
             Minson, Julia. 2026. <em>How to Disagree Better</em>. United States of America: Avery.
         </div>
