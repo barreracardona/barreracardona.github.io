@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desacuerdos Constructivos - LaTeX Font Stack (Fixed)</title>
+    
+    <!-- Import Alegreya Sans and Inconsolata (zi4) securely via Google Fonts CDN -->
+    <link rel="stylesheet" href="https://googleapis.com">
+
+    <style>
+        /* CRITICAL FIX: Explicitly target the oldstyle figures font file provided by Edward Tufte */
+        @font-face {
+            font-family: 'ETbb';
+            src: url('https://github.io') format('woff'),
+                 url('https://github.io') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'ETbb';
+            src: url('https://github.io') format('woff'),
+                 url('https://github.io') format('truetype');
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        /* Core Document Layout styling */
+        body {
+            font-family: 'ETbb', Garamond, serif;
+            font-size: 1.15rem;
+            line-height: 1.65;
+            color: #222222;
+            max-width: 660px;
+            margin: 50px auto;
+            padding: 0 24px;
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* CRITICAL FIX: Forces Alegreya Sans to strictly apply on headers and metadata blocks */
+        h2, .sans-serif-title, .sans-serif-text {
+            font-family: 'Alegreya Sans', sans-serif !important;
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .sans-serif-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 1.6em;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        q {
+            font-style: normal;
+            quotes: "«" "»" "“" "”";
+        }
+
+        /* Typewriter text: Replicating \usepackage[varqu,varl]{zi4} (Inconsolata) */
+        code, pre, .tt-url {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.95em;
+            background-color: #f7f7f7;
+            padding: 1px 4px;
+            border-radius: 3px;
+            word-break: break-all;
+        }
+
+        /* Typography spacing rules for small caps (\textlssc) */
+        .small-caps {
+            font-variant: small-caps;
+            letter-spacing: 0.06em;
+        }
+        
+        .lowercase-sc {
+            text-transform: lowercase;
+        }
+
+        /* In-text citation formatting */
+        .citation {
+            color: #222222;
+            margin-left: 1px;
+        }
+
+        /* Footnote references pointer */
+        .footnote-ref {
+            text-decoration: none;
+            vertical-align: super;
+            font-size: 0.78em;
+            font-weight: bold;
+            color: #1a5ab4;
+            margin-left: 2px;
+        }
+
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #e0e0e0;
+            margin: 45px 0 25px 0;
+        }
+
+        .footnotes-section {
+            font-size: 0.95rem;
+            color: #444444;
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+
+        .footnotes-section ol {
+            padding-left: 22px;
+        }
+
+        .footnotes-section li {
+            margin-bottom: 12px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #1a5ab4;
+            font-size: 0.95em;
+            margin-left: 6px;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sans Serif Header to instantly verify Alegreya Sans loading -->
+    <h2 class="sans-serif-title">Desacuerdos Constructivos</h2>
+
+    <p>El verdadero problema no está en la existencia de los desacuerdos, como sí en el modo en que los abordamos (y los supuestos, a menudo falsos, sobre los que actuamos durante esos momentos). Minson quisiera equiparnos con las herramientas prácticas (¡basadas en la evidencia!) que son útiles para tener lo que denomina <q>desacuerdos constructivos</q>, es decir, desacuerdos en que las partes involucradas se marchan con una mayor disposición a hablarse de nuevo <span class="citation">(Minson 2026, <span class="small-caps lowercase-sc">xxv</span>)</span>. Dichas herramientas se subsumen en lo que Minson llama <q>receptividad a opiniones contrarias</q>. Define este constructo como <q>la disposición a acceder, considerar y evaluar los puntos de vista tanto en favor como en contra de algún asunto, de una manera imparcial</q> <span class="citation">(Minson 2026, 21)</span>.<a href="#nota1" id="ref1" class="footnote-ref">1</a></p>
+
+    <p>El acento <em>no</em> está puesto en la persuasión, y ni siquiera en el <em>acuerdo</em> sobre algún punto medio. De hecho, las investigaciones de Minson parecen indicar que aproximarnos a los desacuerdos con el objetivo de cambiar la opinión de la contraparte no es más que una buena manera de convertir un desacuerdo en un conflicto.</p>
+
+    <p>En la raíz, casi todo lo que acaba saliendo mal en los desacuerdos viene del <em>realismo ingenuo</em>: nuestra natural tendencia a asumir irreflexivamente que el mundo es tal y como lo percibimos, que nuestros juicios acerca de la realidad son con certeza verdaderos. Entramos en la conversación con alguien más teniendo la incuestionada e incuestionable convicción de que nosotros estamos en lo cierto y la otra persona sencillamente está equivocada. De aquí se desprende otro <q>automatismo</q> psicológico igualmente perjudicial: la atribución. Habiendo establecido que la otra persona obviamente está equivocada, generamos todo tipo de explicaciones (y nos las creemos) sobre las causas y motivos del presunto error ajeno. La otra persona no solo está equivocada, sino que está equivocada porque no es lo suficientemente inteligente, no ha investigado tanto, tiene malas intenciones, es incapaz de ver las cosas como son, etc. Nuestra perseverancia en el realismo ingenuo y las atribuciones nos apartan de cualquier desacuerdo constructivo que pudiéramos haber tenido.</p>
+
+    <!-- Footnotes Section -->
+    <hr />
+    <div class="footnotes-section">
+        <ol>
+            <li id="nota1">Por sus siglas en inglés, podemos referirnos a esto como <span class="small-caps">ROV</span>, <em>receptiveness to opposing views</em>.<a href="#ref1" class="back-link">↩</a></li>
+        </ol>
+    </div>
+
+    <!-- Bibliography Section -->
+    <div class="bibliography-section">
+        <h2 class="sans-serif-text" style="font-size: 1.45rem; margin-bottom: 22px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;">Referencias</h2>
+        <div class="bib-entry">
+            Minson, Julia. 2026. <em>How to Disagree Better</em>. United States of America: Avery.
+        </div>
+    </div>
+
+</body>
+</html>
