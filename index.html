@@ -38,8 +38,11 @@
             font-family: 'Alegreya Sans', sans-serif !important;
             font-weight: 700;
             color: #111111;
+            text-transform: lowercase;
+            font-variant: small-caps;
+            letter-spacing: 0.07em;
             /* Resets heading fonts to default layout lining numbers */
-            font-variant-numeric: lining-nums proportional-nums;
+            /* font-variant-numeric: lining-nums proportional-nums; */
         }
 
         .sans-serif-title {
@@ -48,14 +51,32 @@
             margin-bottom: 30px;
             border-bottom: 1px solid #eeeeee;
             padding-bottom: 10px;
-            letter-spacing: -0.01em;
+            /*letter-spacing: -0.01em;*/
         }
 
         /* --- BODY TEXT PARAGRAPHS --- */
-        p {
-            margin-bottom: 1.6em;
-            text-align: justify;
-            text-justify: inter-word;
+        
+
+        p{
+              
+            /* letter-spacing: -0.01em; 
+            word-spacing: 0.02em; */
+              text-align: justify;
+  
+              /* 1. The Core: Let the browser blend word and character spacing */
+              text-justify: auto; 
+              
+              /* 2. Enable micro-typography character adjustments */
+              font-variant-numeric: oldstyle-nums proportional-nums;
+              font-kerning: normal;
+              
+              /* 3. Force the layout engine to hyphenate tightly */
+              hyphens: auto;
+              hyphenate-limit-chars: 6 3 3; /* Min word length 6, min 3 before break, min 3 after */
+              
+              /* 4. Allow slight character squeezing if required */
+              text-rendering: optimizeLegibility;
+
         }
 
         em {
@@ -141,6 +162,46 @@
             font-size: 1.1rem;
             margin-bottom: 12px;
         }
+            @media (prefers-color-scheme: dark) {
+            body {
+                /* Soft charcoal background reduces harsh monitor glare */
+                background-color: #121212;
+                
+                /* Crisp, low-strain off-white body text */
+                color: #e0e0e0;
+            }
+
+            /* --- Heading Adjustments --- */
+            h1, h2, h3, .sans-serif-title, .sans-serif-text {
+                color: #ffffff;
+                border-bottom-color: #2c2c2c; /* Dims the title border */
+            }
+
+            /* --- Inlined Code Snippets --- */
+            code, pre, kbd, .tt-text {
+                background-color: #1e1e1e;
+                color: #f7f7f7;
+            }
+
+            /* --- Structural & Contextual Accents --- */
+            hr {
+                border-top-color: #2c2c2c;
+            }
+
+            .citation {
+                color: #b0b0b0;
+            }
+
+            .footnotes-section {
+                color: #aaaaaa;
+            }
+
+            /* Balanced, high-visibility blue for links in dark mode */
+            .footnote-ref, .back-link {
+                color: #6ba4ff;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -153,16 +214,17 @@
 
     <p>El acento <em>no</em> está puesto en la persuasión, y ni siquiera en el <em>acuerdo</em> sobre algún punto medio. De hecho, las investigaciones de Minson parecen indicar que aproximarnos a los desacuerdos con el objetivo de cambiar la opinión de la contraparte no es más que una buena manera de convertir un desacuerdo en un conflicto.</p>
 
-    <!-- Monospace Block: Renders Inconsolata Standard Lining Elements -->
-    <p>Para analizar las interacciones digitales se puede correr un script en <code>config.process_data()</code> usando las funciones del sistema base.</p>
+    <!-- Monospace Block: Renders Inconsolata Standard Lining Elements 
+    <p>Para analizar las interacciones digitales se puede correr un script en <code>config.process_data()</code> usando las funciones del sistema base.</p>-->
 
     <p>En la raíz, casi todo lo que acaba saliendo mal en los desacuerdos viene del <em>realismo ingenuo</em>: nuestra natural tendencia a asumir irreflexivamente que el mundo es tal y como lo percibimos, que nuestros juicios acerca de la realidad son con certeza verdaderos. Entramos en la conversación con alguien más teniendo la incuestionada e incuestionable convicción de que nosotros estamos en lo cierto y la otra persona sencillamente está equivocada. De aquí se desprende otro <q>automatismo</q> psicológico igualmente perjudicial: la atribución. Habiendo establecido que la otra persona obviamente está equivocada, generamos todo tipo de explicaciones (y nos las creemos) sobre las causas y motivos del presunto error ajeno. La otra persona no solo está equivocada, sino que está equivocada porque no es lo suficientemente inteligente, no ha investigado tanto, tiene malas intenciones, es incapaz de ver las cosas como son, etc. Nuestra perseverancia en el realismo ingenuo y las atribuciones nos apartan de cualquier desacuerdo constructivo que pudiéramos haber tenido.</p>
 
     <!-- Footnotes Section -->
     <hr />
     <div class="footnotes-section">
+    <h2 class="sans-serif-text" style="font-size: 1.45rem; margin-bottom: 22px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;">Notas</h2>
         <ol>
-            <li id="nota1">Por sus siglas en inglés, podemos referirnos a esto como <span class="small-caps">ROV</span>, <em>receptiveness to opposing views</em>.<a href="#ref1" class="back-link">↩</a></li>
+            <li id="nota1">Por sus siglas en inglés, podemos referirnos a esto como <span class="small-caps">rov</span>, <em>receptiveness to opposing views</em>.<a href="#ref1" class="back-link">↩</a></li>
         </ol>
     </div>
 
