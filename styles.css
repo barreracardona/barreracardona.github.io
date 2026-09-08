@@ -1,0 +1,566 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inconsolata:wght@200..900&display=swap');
+
+/* ==========================================================================
+   Typographic Variables & Global Setup
+   ========================================================================== */
+:root {
+  --serif-font: 'EB Garamond', Garamond, Georgia, serif;
+  --sans-font: 'Alegreya Sans', sans-serif;
+  --mono-font: 'Inconsolata', monospace;
+  
+  /* Color Palettes */
+  --text-main: #222222;
+  --text-heading: #111111;
+  --text-muted: #444444;
+  --text-dim: #777777;
+  --border-color: #eeeeee;
+  --border-structural: #222222;
+  --bg-main: #ffffff;
+  --bg-inline-code: #f7f7f7;
+  --link-color: #1a5ab4;
+  
+  /* Vertical Grid Hierarchy (Based on 1.3rem Base) */
+  --base-font-size: 1.3rem;
+  --base-line-height: 1.65;
+  --space-unit: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-main: #e0e0e0;
+    --text-heading: #ffffff;
+    --text-muted: #aaaaaa;
+    --text-dim: #888888;
+    --border-color: #2c2c2c;
+    --border-structural: #ffffff;
+    --bg-main: #121212;
+    --bg-inline-code: #1e1e1e;
+    --link-color: #6ba4ff;
+  }
+}
+
+/* --- Document Initialization --- */
+body {
+  font-family: var(--serif-font);
+  font-size: var(--base-font-size);
+  line-height: var(--base-line-height);
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  max-width: 660px;
+  margin: calc(var(--space-unit) * 2.5) auto; /* 60px equivalent */
+  padding: 0 var(--space-unit);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Classical Asymmetric Framework (Header & Footer)
+   ========================================================================== */
+.site-header,
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; /* Locks diverse font sizes to an identical horizontal axis */
+  width: 100%;
+}
+
+.site-header {
+  margin-top: calc(var(--space-unit) * 0.833); /* 20px */
+  margin-bottom: calc(var(--space-unit) * 2.5); /* 60px */
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 15px;
+}
+
+.site-logo {
+  font-family: var(--sans-font);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--text-heading);
+  text-decoration: none;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  letter-spacing: 0.07em;
+}
+
+.site-nav {
+  display: flex;
+  gap: var(--space-unit);
+}
+
+.nav-link {
+  font-family: var(--serif-font);
+  font-size: 1.1rem;
+  font-style: italic; /* Classical Bringhurst contrast to sans-serif small-caps */
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-heading);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.site-footer {
+  margin-top: calc(var(--space-unit) * 3.333); /* 80px deep colophon breath */
+  margin-bottom: calc(var(--space-unit) * 1.666); /* 40px */
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--space-unit);
+}
+
+.footer-colophon p {
+  font-family: var(--serif-font);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 320px;
+  text-align: left; /* Editorial asymmetrical anchor overrides body justification */
+}
+
+.footer-meta .copyright {
+  font-family: var(--serif-font);
+  font-size: 1rem;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Typographic Headings Hierarchy
+   ========================================================================== */
+h1, h2, h3, .sans-serif-title, .sans-serif-text {
+  font-family: var(--sans-font) !important;
+  font-weight: 700;
+  color: var(--text-heading);
+  text-transform: lowercase;
+  font-variant: small-caps;
+  letter-spacing: 0.07em;
+}
+
+/* 
+   Bringhurst Rational Scale Adjustments:
+   Using precise proportional sizing and margin steps anchored to the base line-height
+*/
+h1, .sans-serif-title {
+  font-size: 2.1rem;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: calc(var(--space-unit) * 1.25); /* 30px */
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  line-height: 1.3;
+  margin-top: calc(var(--space-unit) * 2);    /* Generous breathing room above sections */
+  margin-bottom: calc(var(--space-unit) * 0.75); /* Snug fit to upcoming content block */
+}
+
+h3 {
+  font-size: 1.3rem; /* Same scale as text, distinguished cleanly via weight/variant */
+  line-height: var(--base-line-height);
+  margin-top: calc(var(--space-unit) * 1.5);
+  margin-bottom: calc(var(--space-unit) * 0.5);
+}
+
+/* ==========================================================================
+   Core Text Blocks & Elements
+   ========================================================================== */
+p {
+  margin-top: 0;
+  margin-bottom: var(--space-unit);
+  text-align: justify;
+  text-justify: auto; 
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  font-kerning: normal;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3; 
+  text-rendering: optimizeLegibility;
+}
+
+p:last-of-type {
+  margin-bottom: 0;
+}
+
+em {
+  font-style: italic;
+}
+
+q {
+  font-style: normal;
+  quotes: "«" "»" "“" "”";
+}
+
+.small-caps {
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+
+.lowercase-sc {
+  text-transform: lowercase;
+}
+
+/* ==========================================================================
+   Structured List Systems
+   ========================================================================== */
+ul.site-list,
+ol.site-list {
+  margin: var(--space-unit) 0;
+  padding: 0;
+  list-style: none !important;
+}
+
+ul.site-list li,
+ol.site-list li {
+  font-family: var(--serif-font) !important;
+  font-size: var(--base-font-size) !important;
+  line-height: var(--base-line-height);
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+ul.site-list li:last-child,
+ol.site-list li:last-child {
+  margin-bottom: 0;
+}
+
+.list-content {
+  text-align: justify;
+  text-justify: auto;
+  display: inline; 
+}
+
+/* --- Unordered Architecture --- */
+ul.site-list > li {
+  padding-left: 1.5em;
+  position: relative;
+}
+
+ul.site-list > li::before {
+  content: "■";
+  font-size: 0.7rem;
+  color: var(--text-heading);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+}
+
+/* Corrected Unordered Nested Logic */
+ul.site-list ul.site-list > li::before {
+  content: "○";
+  font-size: 0.8rem;
+}
+
+/* --- Ordered (Hierarchical counter) Architecture --- */
+ol.site-list {
+  counter-reset: essay-counter;
+}
+
+ol.site-list > li {
+  padding-left: 0; 
+}
+
+ol.site-list > li::before {
+  counter-increment: essay-counter;
+  content: counters(essay-counter, ".") ".";
+  display: inline;
+  margin-right: 0.5em;
+  font-family: var(--serif-font) !important;
+  font-size: var(--base-font-size) !important; 
+  font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums !important;
+  color: var(--text-heading);
+  line-height: var(--base-line-height);
+}
+
+/* Clean Macro clearing for mixed nested layers */
+ul.site-list ul.site-list,
+ul.site-list ol.site-list,
+ol.site-list ul.site-list,
+ol.site-list ol.site-list {
+  margin: 10px 0 0 0;
+  padding-left: 1.5em; 
+}
+
+/* ==========================================================================
+   Editorial Content Blocks (Images, Quotes, Tables)
+   ========================================================================== */
+
+/* --- Images & Figures Framework --- */
+.site-image {
+  margin: calc(var(--space-unit) * 1.833) 0; /* ~44px */
+  padding: 0;
+  width: 100%;
+}
+
+.site-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-image img {
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+  .site-image img:hover {
+    opacity: 1;
+  }
+}
+
+.site-image figcaption {
+  margin-top: 14px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.caption-main {
+  margin-bottom: 6px;
+}
+
+.image-label {
+  font-family: var(--sans-font);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  margin-right: 6px;
+}
+
+.image-title {
+  font-family: var(--serif-font);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text-heading);
+}
+
+.image-caption {
+  font-family: var(--sans-font);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+.image-credit {
+  font-family: var(--serif-font);
+  font-size: 0.85rem;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
+/* --- Blockquotes Framework --- */
+.site-blockquote {
+  margin: calc(var(--space-unit) * 1.333) var(--space-unit); /* 32px vertical, 24px horizontal */
+  padding: 0;
+  border: 0;
+}
+
+.quote-text {
+  font-family: var(--serif-font) !important;
+  font-size: 1.15rem !important; 
+  line-height: 1.55;             
+  color: var(--text-muted);                
+  text-align: justify;
+  text-justify: auto;
+  margin-bottom: 12px;
+}
+
+.quote-attribution {
+  font-family: var(--serif-font) !important;
+  font-size: 1.05rem !important;
+  color: var(--text-dim);
+  text-align: right; 
+  line-height: 1.4;
+}
+
+.quote-author {
+  font-weight: 500;
+}
+
+.quote-source {
+  font-style: italic;
+}
+
+/* --- Tables Framework --- */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: calc(var(--space-unit) * 1.666) 0; /* 40px */
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-rendering: optimizeLegibility;
+}
+
+.site-table caption {
+  font-family: var(--sans-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.site-table caption .caption-title {
+  font-family: var(--serif-font);
+  font-size: 1.1rem;
+  font-style: italic;
+  text-transform: none;
+  font-variant: normal;
+  letter-spacing: normal;
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.site-table th,
+.site-table td {
+  font-family: var(--serif-font);
+  line-height: 1.5;
+  padding: 10px 12px;
+  text-align: left; 
+  vertical-align: baseline;
+}
+
+.site-table th {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  border-top: 2px solid var(--border-structural);
+  border-bottom: 1px solid var(--border-structural);
+}
+
+.site-table td {
+  font-size: 1.2rem;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.site-table .num-col {
+  text-align: right; 
+  font-variant-numeric: lining-nums tabular-nums !important;
+}
+
+.site-table tbody tr:last-child td {
+  border-bottom: 2px solid var(--border-structural); 
+}
+
+/* ==========================================================================
+   Code Snippets & Citations
+   ========================================================================== */
+code, pre, kbd, .tt-text, .doi-link {
+  font-family: var(--mono-font) !important;
+  font-size: 0.95em;
+  background-color: var(--bg-inline-code);
+  padding: 2px 5px;
+  border-radius: 4px;
+  word-break: break-all;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.citation {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Footnotes & Bibliographies
+   ========================================================================== */
+.footnote-ref {
+  text-decoration: none;
+  vertical-align: super;
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--link-color);
+  margin-left: 1px;
+}
+
+.footnote-ref:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: calc(var(--space-unit) * 2.083) 0 calc(var(--space-unit) * 1.25) 0; /* 50px to 30px spacing ratio */
+}
+
+.footnotes-section {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.footnotes-section ol {
+  padding-left: 20px;
+}
+
+.footnotes-section li {
+  margin-bottom: 12px;
+  text-align: justify;
+  text-justify: auto;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+.back-link {
+  text-decoration: none;
+  color: var(--link-color);
+  font-size: 0.9em;
+  margin-left: 4px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.bib-entry {
+  font-size: 1.1rem;
+  margin-bottom: 16px;       
+  text-align: left;
+  padding-left: 36px;        
+  text-indent: -36px;        
+}
+
+.doi-link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.doi-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Global Mobile Adjustments
+   ========================================================================== */
+@media (max-width: 480px) {
+  .site-header,
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .site-nav {
+    gap: 16px;
+  }
+  
+  .site-blockquote {
+    margin: 28px 0.8em; 
+  }
+}
