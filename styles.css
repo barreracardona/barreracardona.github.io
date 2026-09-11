@@ -148,24 +148,30 @@ body {
   color: var(--text-muted);
 }
 
+
 /* ==========================================================================
-   Typographic Headings Hierarchy (Audited Proportions)
+   Typographic Headings Hierarchy (Audited & Aligned)
    ========================================================================== */
-.entry-title, h2, h3, h4, .sans-serif-title {
+.entry-title, h2, h3, .sans-serif-title {
   font-family: var(--sc-font) !important;
   color: var(--text-heading);
   text-transform: lowercase;
   letter-spacing: 0.06em;
+  
+  /* Forces natural, un-hyphenated left-aligned flow on structural titles */
+  text-align: left !important;
+  text-justify: none !important;
+  hyphens: none !important;
 }
 
 .entry-title {
   font-size: 2.1rem;
-  line-height: 1.2;
+  line-height: 1.15;
   font-weight: 700; 
   margin-top: 0;
-  margin-bottom: calc(var(--space-unit) * 1.25);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 10px;
+  margin-bottom: 6px !important;
+  border: 0 !important; 
+  padding: 0 !important;
 }
 
 h2 {
@@ -186,27 +192,98 @@ h3 {
 
 h4 {
   font-family: var(--sans-font) !important; 
-  font-size: 1.3rem; /* Re-aligned to full body reading dimension */
+  font-size: 1.3rem; 
   font-weight: 500;  
   font-style: italic;
-  color: var(--text-heading);
   text-transform: none;
   letter-spacing: 0.02em;
   margin-top: calc(var(--space-unit) * 1.25);
   margin-bottom: calc(var(--space-unit) * 0.5);
+  
+  /* Standard left-alignment safeguards for minor headers */
+  text-align: left !important;
+  text-justify: none !important;
+  hyphens: none !important;
 }
 
 /* ==========================================================================
-   Core Text Blocks & Elements
+   Article Header Module
    ========================================================================== */
-p {
+.article-header {
+  margin-top: 0;
+  margin-bottom: calc(var(--space-unit) * 1.666); 
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: calc(var(--space-unit) * 0.833); 
+}
+
+p.entry-subtitle {
+  font-family: var(--serif-font) !important;
+  font-size: 1.25rem; 
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.4;
+
+  /* Overrides paragraph blocks and secures fluid left alignment */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important; 
+  padding: 0 !important;
+  text-align: left !important;
+  text-justify: none !important;
+  hyphens: none !important;
+}
+
+.entry-meta-details {
+  font-family: var(--sc-font) !important;
+  font-size: 0.85rem;
+  font-weight: 500; 
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  text-transform: lowercase; 
+  
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 14px !important; 
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4;
+}
+
+.entry-meta-details .meta-value {
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  color: var(--text-muted);
+}
+
+.entry-meta-details .meta-label {
+  color: var(--text-dim);
+}
+
+.entry-meta-details .meta-divider {
+  color: var(--border-structural);
+  margin: 0 4px;
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   Core Blocks & Elements
+   ========================================================================== */
+p, 
+.footnotes-section li, 
+.epigraph-text, 
+p.abstract-content,
+.dialogue-text,
+blockquote.dialogue-text,
+p.citation-speech,
+p.timeline-event {
   margin-top: 0;
   margin-bottom: var(--space-unit);
   text-align: justify;
   text-justify: auto; 
-  font-variant-numeric: oldstyle-nums proportional-nums; 
+  font-variant-numeric: oldstyle-nums proportional-nums;
   font-kerning: normal;
-  hyphens: auto;
+  hyphens: auto !important;
   hyphenate-limit-chars: 6 3 3; 
   text-rendering: optimizeLegibility;
 }
@@ -235,6 +312,242 @@ q {
   font-weight: 400 !important;                  
   text-transform: lowercase;
   letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   Article Thesis Abstract Environment
+   ========================================================================== */
+
+/* The Abstract Block Frame Container */
+.entry-abstract {
+  /* Indents the entire block symmetrically on both margins to narrow the measure */
+  margin: calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 1.25);
+  
+  /* Delicate structural bounding frame separates abstract from prose text streams */
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  
+  /* Symmetrical vertical cushion room inside the line borders */
+  padding: calc(var(--space-unit) * 0.75) 0;
+}
+
+/* --- Internal Content Optimization --- */
+p.abstract-content {
+  font-family: var(--serif-font) !important;
+  font-size: 1.15rem !important; 
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* --- The Architectural Abstract Label Marker --- */
+.abstract-label {
+  font-family: var(--sc-font) !important; /* Employs native Alegreya Sans SC */
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-heading);
+  text-transform: lowercase; /* Matches your automated small-caps mapping engine */
+  margin-right: 4px;
+}
+
+/* --- Dark Mode Accommodations --- */
+@media (prefers-color-scheme: dark) {
+  .entry-abstract {
+    border-top-color: var(--border-color);
+    border-bottom-color: var(--border-color);
+  }
+  p.abstract-content {
+    color: var(--text-muted);
+  }
+  .abstract-label {
+    color: var(--text-heading);
+  }
+}
+
+/* --- Small Screen Mobile Adaptations --- */
+@media (max-width: 480px) {
+  .entry-abstract {
+    /* Relaxes the deep horizontal indents on narrow viewports to maximize mobile readability */
+    margin: calc(var(--space-unit) * 1.25) 0.5em;
+    padding: calc(var(--space-unit) * 0.6) 0;
+  }
+}
+
+/* ==========================================================================
+   Editorial Epigraph Block (Asymmetric Opening Quote)
+   ========================================================================== */
+
+.site-epigraph {
+  /* Restricts the text footprint and floats it asymmetrically to the right margin */
+  width: 65%;
+  margin-top: 0;
+  margin-left: auto; /* Pushes the block perfectly to the right edge */
+  margin-right: 0;
+  margin-bottom: calc(var(--space-unit) * 1.666); /* ~40px spacing before body text opens */
+  
+  padding: 0;
+}
+
+/* --- Quote Narrative Typography --- */
+.epigraph-text {
+  font-family: var(--serif-font) !important;
+  font-size: 1.15rem !important;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin: 0 0 12px 0 !important;
+  padding: 0;
+}
+
+/* --- Contextual Emphasis Inversion remains local to this voice --- */
+.epigraph-text em,
+.epigraph-text i {
+  font-family: var(--serif-font) !important;
+  font-style: normal !important;
+  font-weight: inherit;
+  color: var(--text-heading);
+}
+
+/* --- Attribution Row Typography --- */
+.epigraph-attribution {
+  font-family: var(--sans-font) !important; /* Humanist sans provides a crisp structural anchor */
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  text-align: right; /* Aligns the signature row neatly to the right margin */
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+/* Isolates the source title text */
+.epigraph-attribution cite {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* --- Dark Mode Accommodations --- */
+@media (prefers-color-scheme: dark) {
+  .epigraph-text {
+    color: var(--text-muted);
+  }
+  .epigraph-attribution {
+    color: var(--text-dim);
+  }
+  .epigraph-attribution cite {
+    color: var(--text-muted);
+  }
+}
+
+/* --- Responsive Layout Rule --- */
+@media (max-width: 560px) {
+  .site-epigraph {
+    /* Expands text area on tiny screens to avoid narrow, heavily hyphenated text strips */
+    width: 85%;
+    margin-bottom: calc(var(--space-unit) * 1.25);
+  }
+}
+
+
+
+/* ==========================================================================
+   Editorial Drop Cap Environment (Classical Multi-Line Initial)
+   ========================================================================== */
+
+/* Target the opening paragraph to isolate the first word tracking */
+p.opening-paragraph {
+  text-indent: 0 !important; /* Discards your standard paragraph first-line indent */
+}
+
+/* --- The Initial Letter Alignment Mechanics --- */
+.drop-cap {
+  font-family: var(--serif-font) !important; /* Matches the literary prose voice */
+  font-size: 3.55rem;                        /* Spans exactly two lines of your 1.3rem text */
+  font-weight: 400;                          /* Regular weight prevents a heavy ink blotch */
+  line-height: 0.85;                         /* Packs the line height tight to drop the letter */
+  
+  float: left;
+  position: relative;
+  
+  /* Vertical Baseline Locks */
+  margin-top: 5px;                           /* Micro-adjustment anchors top precisely to cap-height */
+  margin-bottom: -2px;                       /* Locks the base cleanly onto the second text baseline */
+  margin-right: 8px;                         /* Crisp, uniform whitespace gutter on the right edge */
+  
+  color: var(--text-heading);
+  text-rendering: optimizeLegibility;
+}
+
+/* --- Dark Mode Accommodations --- */
+@media (prefers-color-scheme: dark) {
+  .drop-cap {
+    color: var(--text-heading);
+  }
+}
+
+/* --- Mobile Responsiveness Safeguard --- */
+@media (max-width: 480px) {
+  .drop-cap {
+    /* Slightly shrinks the bounding footprint on mobile to protect narrow measures */
+    font-size: 3.3rem;
+    margin-right: 6px;
+    margin-top: 4px;
+  }
+}
+
+
+/* ==========================================================================
+   Editorial Text Hyperlinks
+   ========================================================================== */
+
+/* Target anchors specifically within your prose columns to protect layout tags */
+.text-container p a,
+.footnotes-section li a,
+.site-blockquote a {
+  color: var(--text-main); /* Inherits the primary text tone to protect column density */
+  text-decoration: none;   /* Discards the heavy, native browser underline engine */
+  
+  /* Creates an ultra-thin, quiet border track nested below the font baseline */
+  border-bottom: 1px solid var(--border-color);
+  
+  /* Smoothly shifts color values during interactions without jarring layout flashes */
+  transition: color 0.15s ease, border-color 0.15s ease;
+  
+  /* Adds a microscopic safety padding lane to keep the border line clear of letter descenders */
+  padding-bottom: 1px;
+}
+
+/* --- Interaction (Hover) Engine States --- */
+.text-container p a:hover,
+.footnotes-section li a:hover,
+.site-blockquote a:hover {
+  color: var(--link-color);          /* Shifts smoothly to your established blue accent */
+  border-bottom-color: var(--link-color); /* The underline updates in perfect lockstep */
+}
+
+/* --- Focus Rings for Keyboard Accessibility --- */
+.text-container p a:focus,
+.footnotes-section li a:focus,
+.site-blockquote a:focus {
+  outline: 2px dotted var(--link-color);
+  outline-offset: 4px;
+}
+
+/* --- Dark Mode Accommodations --- */
+@media (prefers-color-scheme: dark) {
+  .text-container p a {
+    color: var(--text-main);
+    border-bottom-color: var(--border-color);
+  }
+  
+  .text-container p a:hover,
+  .footnotes-section li a:hover,
+  .site-blockquote a:hover {
+    color: var(--link-color); /* Automatically utilizes your vibrant light-blue hex value */
+    border-bottom-color: var(--link-color);
+  }
 }
 
 /* ==========================================================================
@@ -293,11 +606,77 @@ q {
   transition: color 0.15s ease;
 }
 
+.item-title em,
+.item-title i {
+  font-family: var(--serif-font) !important; /* Retains your literary serif font */
+  font-style: italic !important;             /* Flips the emphasized word into cursive italic */
+  font-weight: inherit;
+}
+
 .item-title:hover {
   color: var(--link-color); 
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-underline-offset: 4px; /* Classic, clean structural separation track */
 }
+
+/* ==========================================================================
+   Editorial Dialogue / Scripted Interview Environment
+   ========================================================================== */
+
+.site-dialogue {
+  margin-top: calc(var(--space-unit) * 1.5);
+  margin-bottom: calc(var(--space-unit) * 1.5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-unit); /* Precise 24px vertical separation step between turns */
+}
+
+/* --- The Asymmetric Row Framework --- */
+.dialogue-row {
+  display: grid;
+  /* Left column: Speaker Name (110px) | Right column: Spoken Narrative Fluid Space */
+  grid-template-columns: 110px 1fr;
+  column-gap: 20px;
+  align-items: baseline; /* Guarantees small caps and serif lock onto an identical text line */
+}
+
+/* --- The Speaker Label: Clean Sans Small-Caps --- */
+.speaker-name {
+  font-family: var(--sc-font) !important;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: 0.05em;
+  text-transform: lowercase; /* Automates lowercase small-caps mapping engine */
+  text-align: left;
+}
+
+/* --- The Spoken Text: Literary Serif Prose --- */
+.dialogue-text {
+  font-family: var(--serif-font) !important;
+  color: var(--text-main);
+  
+  /* Overrides the global paragraph bottom margin so the parent flex gap handles vertical space */
+  margin-bottom: 0 !important; 
+}
+
+
+/* --- Small Screen Mobile Adaptation --- */
+@media (max-width: 560px) {
+  .dialogue-row {
+    display: block; /* Stacks speaker name over text on narrow mobile viewports */
+  }
+  
+  .speaker-name {
+    display: block;
+    margin-bottom: 6px; /* Snugs the label tightly above its text narrative block */
+  }
+  
+  .dialogue-text {
+    margin-bottom: 12px;
+  }
+}
+
 
 /* ==========================================================================
    Structured List Systems
@@ -422,4 +801,205 @@ ol.site-list ol.site-list {
 }
 
 @media (prefers-color-scheme: dark) {
-  .site-image img {opacity: 0.85;transition: opacity 0.2s ease;}.site-image img:hover {opacity: 1;}}.site-image figcaption {margin-top: 14px;line-height: 1.45;text-align: left;}.caption-main {margin-bottom: 6px;}.image-label {font-family: var(--sc-font);font-weight: 700;font-size: 0.95rem;color: var(--text-heading);margin-right: 6px;text-transform: lowercase;}.image-title {font-family: var(--serif-font);font-size: 1.1rem;font-style: italic;color: var(--text-heading);}.image-caption {font-family: var(--sans-font);font-size: 0.95rem;font-weight: 400;color: var(--text-muted);letter-spacing: 0.01em;}.image-credit {font-family: var(--serif-font);font-size: 0.85rem;font-variant-numeric: oldstyle-nums proportional-nums;color: var(--text-dim);letter-spacing: 0.02em;}.site-blockquote {margin: calc(var(--space-unit) * 1.333) 0;padding-left: var(--space-unit);padding-right: var(--space-unit);border: 0;}.quote-text {font-family: var(--serif-font) !important;font-size: 1.15rem !important;line-height: 1.55;color: var(--text-muted);text-align: justify;text-justify: auto;margin-bottom: 12px;}.quote-attribution {font-family: var(--serif-font) !important;font-size: 1.05rem !important;color: var(--text-dim);text-align: right;line-height: 1.4;}.quote-author {font-weight: 500;}.quote-source {font-style: italic;}.table-container {width: 100%;overflow-x: auto;margin: calc(var(--space-unit) * 1.666) 0;-webkit-overflow-scrolling: touch;}.site-table {width: 100%;border-collapse: collapse;text-rendering: optimizeLegibility;}.site-table caption {text-align: left;margin-bottom: 12px;}.table-label {font-family: var(--sc-font);font-size: 0.95rem;font-weight: 700;color: var(--text-heading);text-transform: lowercase;}.table-title {font-family: var(--serif-font);font-size: 1.1rem;font-style: italic;font-weight: 400;margin-left: 6px;}.site-table th,.site-table td {font-family: var(--serif-font);line-height: 1.5;padding: 10px 12px;text-align: left;vertical-align: baseline;}.site-table th {font-size: 1.15rem;font-weight: 600;color: var(--text-heading);border-top: 2px solid var(--border-structural);border-bottom: 1px solid var(--border-structural);}.site-table td {font-size: 1.2rem;color: var(--text-main);border-bottom: 1px solid var(--border-color);}.site-table .num-col {text-align: right;font-variant-numeric: lining-nums tabular-nums !important;}.site-table tbody tr:last-child td {border-bottom: 2px solid var(--border-structural);}/* ==========================================================================Code Snippets & Citations========================================================================== */code, pre, kbd, .tt-text, .doi-link {font-family: var(--mono-font) !important;font-size: 0.95em;background-color: var(--bg-inline-code);padding: 2px 5px;border-radius: 4px;word-break: break-all;font-variant-numeric: lining-nums tabular-nums;}.citation {color: var(--text-main);}/* ==========================================================================Footnotes & Bibliographies========================================================================== */.footnote-ref {text-decoration: none;vertical-align: super;font-size: 0.75em;font-weight: 700;color: var(--link-color);margin-left: 1px;}.footnote-ref:hover {text-decoration: underline;}hr {border: 0;border-top: 1px solid var(--border-color);margin: calc(var(--space-unit) * 2.083) 0 calc(var(--space-unit) * 1.25) 0;}.footnotes-section {font-size: 0.98rem;color: var(--text-muted);line-height: 1.6;}.footnotes-section ol {padding-left: 20px;}.footnotes-section li {margin-bottom: 12px;text-align: justify;text-justify: auto;font-variant-numeric: oldstyle-nums proportional-nums;}.back-link {text-decoration: none;color: var(--link-color);font-size: 0.9em;margin-left: 4px;}.back-link:hover {text-decoration: underline;}.bib-entry {font-size: 1.1rem;margin-bottom: 16px;text-align: left;padding-left: 36px;text-indent: -36px;}.doi-link {color: var(--link-color);text-decoration: none;}.doi-link:hover {text-decoration: underline;}/* ==========================================================================Global Mobile Adjustments========================================================================== */@media (max-width: 768px) {.site-header,.site-footer {max-width: var(--content-max-width);}}@media (max-width: 480px) {.site-header,.site-footer {flex-direction: column;align-items: flex-start;gap: 15px;}.site-nav {gap: 16px;}.site-blockquote {margin-top: 24px;margin-bottom: 24px;padding-left: 12px;padding-right: 12px;}.index-item {flex-direction: column;align-items: flex-start;gap: 4px;margin-bottom: 20px;}.item-meta {width: auto;}}
+  .site-image img {opacity: 0.85;transition: opacity 0.2s ease;}
+  .site-image img:hover {opacity: 1;}}
+
+.site-image figcaption {margin-top: 14px;line-height: 1.45;text-align: left;}
+.caption-main {margin-bottom: 6px;}.image-label {font-family: var(--sc-font);font-weight: 700;font-size: 0.95rem;color: var(--text-heading);margin-right: 6px;text-transform: lowercase;}
+.image-title {font-family: var(--serif-font);font-size: 1.1rem;font-style: italic;color: var(--text-heading);}
+.image-caption {font-family: var(--sans-font);font-size: 0.95rem;font-weight: 400;color: var(--text-muted);letter-spacing: 0.01em;}
+.image-credit {font-family: var(--serif-font);font-size: 0.85rem;font-variant-numeric: oldstyle-nums proportional-nums;color: var(--text-dim);letter-spacing: 0.02em;}
+
+
+.site-blockquote {margin: calc(var(--space-unit) * 1.333) 0;padding-left: var(--space-unit);padding-right: var(--space-unit);border: 0;}
+
+/* ==========================================================================
+   Scholarly Dramatic Citations (Multi-Speaker Blockquotes)
+   ========================================================================== */
+
+/* Extends your base blockquote to support indented sub-columns */
+.dramatic-citation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Uniform vertical spacing between spoken turns inside the quote */
+}
+
+.dramatic-citation .citation-row {
+  display: grid;
+  /* Narrower shelf (85px) compacts the citation tighter than standard copy text */
+  grid-template-columns: 85px 1fr;
+  column-gap: 16px;
+  align-items: baseline;
+}
+
+/* --- Citation Speaker Label: Quiet Sans Small-Caps --- */
+.citation-speaker {
+  font-family: var(--sc-font) !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted); /* Softer tone prevents labels from being too loud */
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+/* --- Citation Speech: Literary Serif Variant --- */
+p.citation-speech {
+  font-family: var(--serif-font) !important;
+  /* Scaled down to match your global blockquote style profile (1.15rem) */
+  font-size: 1.15rem !important; 
+  line-height: 1.55;
+  color: var(--text-muted);
+  
+  /* Inherits your global print justification math cleanly */
+  text-align: justify;
+  text-justify: auto;
+  
+  margin: 0 !important; /* Strips paragraph margins inside the grid layout */
+  padding: 0 !important;
+}
+
+/* --- Block Attribution Line --- */
+.citation-attribution {
+  font-family: var(--serif-font) !important;
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  text-align: right;
+  margin-top: 8px;
+}
+
+.citation-attribution cite {
+  font-style: italic;
+}
+
+
+.quote-text {font-family: var(--serif-font) !important;font-size: 1.15rem !important;line-height: 1.55;color: var(--text-muted);text-align: justify;text-justify: auto;margin-bottom: 12px;}
+.quote-attribution {font-family: var(--serif-font) !important;font-size: 1.05rem !important;color: var(--text-dim);text-align: right;line-height: 1.4;}
+.quote-author {font-weight: 500;}
+.quote-source {font-style: italic;}
+.table-container {width: 100%;overflow-x: auto;margin: calc(var(--space-unit) * 1.666) 0;-webkit-overflow-scrolling: touch;}
+.site-table {width: 100%;border-collapse: collapse;text-rendering: optimizeLegibility;}
+.site-table caption {text-align: left;margin-bottom: 12px;}
+.table-label {font-family: var(--sc-font);font-size: 0.95rem;font-weight: 700;color: var(--text-heading);text-transform: lowercase;}
+.table-title {font-family: var(--serif-font);font-size: 1.1rem;font-style: italic;font-weight: 400;margin-left: 6px;}
+.site-table th,.site-table td {font-family: var(--serif-font);line-height: 1.5;padding: 10px 12px;text-align: left;vertical-align: baseline;}
+.site-table th {font-size: 1.15rem;font-weight: 600;color: var(--text-heading);border-top: 2px solid var(--border-structural);border-bottom: 1px solid var(--border-structural);}
+.site-table td {font-size: 1.2rem;color: var(--text-main);border-bottom: 1px solid var(--border-color);}
+.site-table .num-col {text-align: right;font-variant-numeric: lining-nums tabular-nums !important;}
+.site-table tbody tr:last-child td {border-bottom: 2px solid var(--border-structural);}
+
+
+/* ==========================================================================
+   Editorial Historical Timeline Environment
+   ========================================================================== */
+
+.history-timeline {
+  margin-top: calc(var(--space-unit) * 1.5);
+  margin-bottom: calc(var(--space-unit) * 1.5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-unit); /* Controls the exact vertical breathing step between historical epochs */
+}
+
+/* --- The Asymmetric Row Grid --- */
+.timeline-row {
+  display: grid;
+  /* Left Column: Date Shelf (100px) | Right Column: Narrative Event Prose Frame */
+  grid-template-columns: 100px 1fr;
+  column-gap: 24px;
+  align-items: baseline; /* Locks the historical text and numbers onto a shared typographic baseline */
+}
+
+/* --- The Chrono Label: Tracked Sans Small-Caps --- */
+.timeline-date {
+  font-family: var(--sc-font) !important; /* Calls your native Alegreya Sans SC vector file */
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  
+  /* Forces numbers into clean text oldstyle figures to match the narrative history mood */
+  font-variant-numeric: oldstyle-nums proportional-nums !important;
+  text-align: left;
+}
+
+/* --- The Event Prose: Streamlined Context --- */
+p.timeline-event {
+  color: var(--text-main);
+  
+  /* Overrides global paragraph bottom padding so the parent timeline-row flex gap handles spacing */
+  margin-bottom: 0 !important; 
+}
+
+/* --- Small Screen Mobile Adaptation --- */
+@media (max-width: 560px) {
+  .timeline-row {
+    display: block; /* Stacks historical dates cleanly above descriptions on mobile screens */
+  }
+  
+  .timeline-date {
+    display: block;
+    margin-bottom: 6px; /* Keeps numbers tucked closely above the upcoming history description */
+  }
+  
+  p.timeline-event {
+    margin-bottom: 12px;
+  }
+}
+
+
+
+/* ==========================================================================
+Code Snippets & Citations
+========================================================================== */
+code, pre, kbd, .tt-text, .doi-link {
+  font-family: var(--mono-font) !important;font-size: 0.95em;
+  background-color: var(--bg-inline-code);
+  padding: 2px 5px;
+  border-radius: 4px;
+  word-break: break-all;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.citation {color: var(--text-main);}
+
+  /* ==========================================================================
+  Footnotes & Bibliographies
+  ========================================================================== */
+.footnote-ref {text-decoration: none;vertical-align: super;font-size: 0.75em;font-weight: 700;color: var(--link-color);margin-left: 1px;}
+.footnote-ref:hover {text-decoration: underline;}
+hr {border: 0;border-top: 1px solid var(--border-color);margin: calc(var(--space-unit) * 2.083) 0 calc(var(--space-unit) * 1.25) 0;}
+.footnotes-section {font-size: 0.98rem;color: var(--text-muted);line-height: 1.6;}
+.footnotes-section ol {padding-left: 20px;}
+.footnotes-section li {margin-bottom: 12px}
+.back-link {text-decoration: none;color: var(--link-color);font-size: 0.9em;margin-left: 4px;}
+.back-link:hover {text-decoration: underline;}
+.bib-entry {font-size: 1.1rem;margin-bottom: 16px;text-align: left;padding-left: 36px;text-indent: -36px;}
+.doi-link {color: var(--link-color);text-decoration: none;}
+.doi-link:hover {text-decoration: underline;}
+
+/* ==========================================================================
+Global Mobile Adjustments
+========================================================================== */
+@media (max-width: 768px) {.site-header,.site-footer {max-width: var(--content-max-width);}}
+@media (max-width: 480px) {
+  .site-header,.site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .site-nav {
+    gap: 16px;
+  }
+  
+  .site-blockquote {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  .index-item {flex-direction: column;align-items: flex-start;gap: 4px;margin-bottom: 20px;}
+  .item-meta {width: auto;}
+}
