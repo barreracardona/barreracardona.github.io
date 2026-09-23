@@ -1,0 +1,1925 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Inconsolata:wght@200..900&display=swap');
+
+/* ==========================================================================
+   1. Design Tokens, Multi-Theme Engine & Global Resets
+   ========================================================================== */
+
+/* 1a. Default Light Theme (Base) */
+:root {
+  --serif-font: "Alegreya", Georgia, serif;
+  --sc-font: "Alegreya SC", Georgia, serif;
+  --sans-font: "Alegreya Sans", system-ui, sans-serif;
+  --sans-sc-font: "Alegreya Sans SC", system-ui, sans-serif;
+  --mono-font: "Inconsolata", monospace;
+  --base-line-height: 1.6;
+
+  /* Locked Rem-Based Margin Architecture */
+  --margin-width: 17.5rem;
+  --margin-gap: 2.5rem;
+
+  /* Color Tokens */
+  --bg-color: #faf9f6;
+  --text-main: #2b2b2b;
+  --text-heading: #111111;
+  --text-muted: #666666;
+  --border-color: #e0e0e0;
+
+  color-scheme: light;
+}
+
+/* 1b. Automatic System Preference: Dark */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-color: #171716;
+    --text-main: #d1cecb;
+    --text-heading: #f0eee9;
+    --text-muted: #888580;
+    --border-color: #2d2c2a;
+
+    color-scheme: dark;
+  }
+}
+
+/* 1c. Explicit Theme Overrides */
+[data-theme="light"] {
+  --bg-color: #faf9f6;
+  --text-main: #2b2b2b;
+  --text-heading: #111111;
+  --text-muted: #666666;
+  --border-color: #e0e0e0;
+
+  color-scheme: light;
+}
+
+[data-theme="sepia"] {
+  --bg-color: #f2efe9;
+  --text-main: #332c2b;
+  --text-heading: #1c1514;
+  --text-muted: #756a65;
+  --border-color: #dad3c7;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg-color: #171716;
+  --text-main: #d1cecb;
+  --text-heading: #f0eee9;
+  --text-muted: #888580;
+  --border-color: #2d2c2a;
+
+  color-scheme: dark;
+}
+
+/* Universal Sizing Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Document Counter Context Baseline */
+body,
+article,
+.text-container {
+  counter-reset: sidenote-counter;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--serif-font);
+  font-size: 1.125rem;
+  line-height: var(--base-line-height);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ==========================================================================
+   2. Core Typography & Elements
+   ========================================================================== */
+p {
+  text-align: left;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+}
+
+q {
+  font-style: normal;
+  quotes: "«" "»" "“" "”";
+}
+
+.inline-sc {
+  font-family: var(--sc-font);
+  font-size: 0.92em;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+blockquote {
+  margin: 1.8rem 0 1.8rem 1.5rem;
+  padding: 0;
+  border: 0;
+  font-style: normal;
+  color: var(--text-main);
+}
+
+blockquote p {
+  margin-bottom: 0.8rem;
+  text-align: left;
+  hyphens: auto;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+code, kbd {
+  font-family: var(--mono-font);
+  font-size: 0.88em;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 0.15em 0.35em;
+  border-radius: 2px;
+}
+
+pre {
+  font-family: var(--mono-font);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.8rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+abbr[title] {
+  font-family: var(--sc-font);
+  font-size: 0.92em;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--text-muted);
+  cursor: help;
+}
+
+/* --- Hyperlinks & Email Anchors --- */
+a:link,
+a:visited {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border-color);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  text-decoration-skip-ink: auto;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--text-heading);
+  text-decoration-color: var(--text-heading);
+}
+
+a[href^="mailto:"] {
+  font-variant-numeric: oldstyle-nums;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 3rem 0;
+}
+
+/* ==========================================================================
+   3. Article Typography, Headings & Epigraphs
+   ========================================================================== */
+.entry-header {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.entry-title {
+  font-family: var(--serif-font);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-heading);
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+}
+
+.entry-subtitle {
+  font-family: var(--serif-font);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.entry-header + p,
+.text-container > p:first-of-type {
+  margin-top: 0;
+}
+
+h2 {
+  font-family: var(--sc-font);
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: normal;
+  text-transform: lowercase;
+  letter-spacing: 0.06em;
+  color: var(--text-heading);
+  line-height: 1.3;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-family: var(--serif-font);
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text-heading);
+  line-height: 1.35;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+/* --- Run-In Indented Abstract --- */
+.entry-abstract {
+  margin: 3rem 2.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.entry-abstract .abstract-label {
+  font-family: var(--sans-sc-font);
+  font-size: 0.9em;
+  text-transform: lowercase;
+  letter-spacing: 0.06em;
+  color: var(--text-heading);
+}
+
+.entry-abstract .em-dash {
+  margin: 0 0.3em;
+  color: var(--text-muted);
+}
+
+p.entry-lead {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--text-heading);
+  margin-bottom: 2rem;
+}
+
+/* --- Epigraph Architecture (Classical Refinement) --- */
+div.epigraph {
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+div.epigraph > blockquote {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 2.5rem; /* Indented left baseline */
+  max-width: 42ch;      /* Delicate, narrow measure */
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+div.epigraph > blockquote > p {
+  font-family: var(--serif-font);
+  font-size: 0.925rem;       /* Reduced from 1.125rem body size */
+  font-style: italic;        /* Traditional epigraph voice */
+  line-height: 1.48;
+  color: var(--text-heading);
+  hyphens: auto;
+  margin-bottom: 0.5rem;
+}
+
+div.epigraph > blockquote > footer {
+  font-size: 0.825rem;
+  line-height: 1.4;
+  text-align: right;
+  color: var(--text-muted);
+  font-variant-numeric: oldstyle-nums;
+  margin-top: 0.5rem;
+}
+
+/* Small-Caps Author Label */
+div.epigraph > blockquote > footer .author {
+  font-family: var(--serif-font);
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text-heading);
+  letter-spacing: 0.04em;
+}
+
+div.epigraph > blockquote > footer > cite {
+  font-family: var(--serif-font);
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* --- Dialogue Systems --- */
+.speaker {
+  font-family: var(--sans-sc-font);
+  font-size: 0.9em;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  margin-right: 0.4em;
+}
+
+blockquote.dialogue {
+  margin: 2.5rem 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+blockquote.dialogue .speech {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+blockquote.dialogue .speaker {
+  font-family: var(--sans-sc-font);
+  font-size: 0.9em;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  text-align: right;
+  user-select: none;
+}
+
+blockquote.dialogue p {
+  margin: 0;
+  color: var(--text-heading);
+}
+
+/* ==========================================================================
+   4. Structured List Systems (Tufte Execution)
+   ========================================================================== */
+ul.site-list,
+ol.site-list {
+  margin: 1.8rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.site-list li,
+ol.site-list li {
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  hyphens: auto;
+}
+
+ul.site-list li:last-child,
+ol.site-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Unordered Lists: Minimal Glyph / Reduced Ink --- */
+ul.site-list > li {
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+ul.site-list > li::before {
+  content: "\2013";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--text-muted);
+}
+
+ul.site-list ul.site-list {
+  margin: 0.5rem 0 0 0;
+}
+
+ul.site-list ul.site-list > li::before {
+  content: "\00B7";
+  font-weight: bold;
+  color: var(--text-muted);
+}
+
+/* --- Ordered Lists: Tabular Micro-Grid --- */
+ol.site-list {
+  counter-reset: tufte-counter;
+}
+
+ol.site-list > li {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  column-gap: 0.6rem;
+  align-items: baseline;
+}
+
+ol.site-list > li::before {
+  counter-increment: tufte-counter;
+  content: counters(tufte-counter, ".") ".";
+  text-align: right;
+  font-variant-numeric: tabular-nums oldstyle-nums;
+  color: var(--text-muted);
+}
+
+ol.site-list > li > ul.site-list,
+ol.site-list > li > ol.site-list {
+  grid-column: 2;
+  margin: 0.5rem 0 0 0;
+}
+
+/* ==========================================================================
+   5. Continuous Index Ledger & Chronology Architecture
+   ========================================================================== */
+.index-intro {
+  margin-bottom: 3.5rem;
+}
+
+.index-label {
+  font-family: var(--sans-sc-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: var(--text-heading);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.index-lead {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.index-ledger {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.index-entry {
+  position: relative;
+}
+
+.index-entry:has(.entry-summary) {
+  margin-bottom: 0.85rem;
+}
+
+.index-entry:not(:has(.entry-summary)) {
+  margin-bottom: 0;
+}
+
+.entry-item-title {
+  font-family: var(--serif-font);
+  font-size: 1.25rem;
+  font-weight: 500;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.entry-item-title a {
+  color: var(--text-heading);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.entry-item-title a:hover {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.entry-summary {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text-main);
+  margin: 0.35rem 0 0 0;
+}
+
+/* --- Typographic Timeline Ledger --- */
+dl.timeline-ledger {
+  margin: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.timeline-ledger .timeline-entry {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+}
+
+.timeline-ledger dt time {
+  font-family: var(--serif-font);
+  font-variant-numeric: oldstyle-nums;
+  font-weight: 600;
+  color: var(--text-heading);
+  display: block;
+  text-align: right;
+}
+
+.timeline-ledger dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-heading);
+}
+
+/* --- Minimal Hairline Chronology --- */
+.timeline-hairline {
+  margin: 3rem 0;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 0.6em;
+  left: -1.5rem;
+  width: 0.5rem;
+  height: 1px;
+  background-color: var(--text-muted);
+}
+
+.timeline-item header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-item time {
+  font-family: var(--sans-font);
+  font-variant-numeric: oldstyle-nums;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.timeline-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-heading);
+}
+
+.timeline-item p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   6. Tables & Tabular Data (Booktabs & Tufte Standards)
+   ========================================================================== */
+.table-container {
+  position: relative;
+  margin: 2.5rem 0;
+  width: 100%;
+}
+
+.table-caption {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--text-heading);
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+  font-size: 0.925rem;
+  line-height: 1.4;
+  color: var(--text-heading);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+table th {
+  text-align: left;
+}
+
+table thead th {
+  font-family: var(--sans-sc-font); /* Clean, high-density table headings */
+  font-size: 0.8em;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  padding: 0.5rem 1rem;
+  vertical-align: bottom;
+  border-bottom: 1px solid var(--text-heading);
+}
+
+table thead tr:first-child th,
+table > tr:first-child td,
+table > tbody > tr:first-child td {
+  border-top: 1.5px solid var(--text-heading);
+}
+
+table tbody tr:last-child td {
+  border-bottom: 1.5px solid var(--text-heading);
+}
+
+table td {
+  padding: 0.45rem 1rem;
+  vertical-align: top;
+}
+
+table th:first-child,
+table td:first-child {
+  padding-left: 0;
+}
+
+table th:last-child,
+table td:last-child {
+  padding-right: 0;
+}
+
+table .num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+table .text {
+  text-align: left;
+}
+
+table tfoot tr td {
+  border-top: 1px solid var(--border-color);
+  border-bottom: none;
+  padding-top: 0.6rem;
+  font-size: 0.825rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  font-variant-numeric: oldstyle-nums;
+}
+
+table tfoot .note-label {
+  font-family: var(--sans-sc-font);
+  font-size: 0.85em;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  margin-right: 0.25em;
+}
+
+/* ==========================================================================
+   7. Base Site Header & Footer
+   ========================================================================== */
+.site-header {
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.site-title:link,
+.site-title:visited {
+  font-family: var(--sans-sc-font);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: var(--text-heading);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-title:hover,
+.site-title:focus {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a:link,
+.nav-links a:visited {
+  font-family: var(--sans-sc-font);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  color: var(--text-heading);
+  text-decoration: none;
+}
+
+.site-footer {
+  margin-top: 6rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.back-to-index:link,
+.back-to-index:visited {
+  font-family: var(--sans-sc-font);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.back-to-index:hover,
+.back-to-index:focus {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.footer-copy {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+/* --- Theme Controls --- */
+.theme-switcher {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-variant-numeric: oldstyle-nums;
+}
+
+.theme-switcher .switcher-label {
+  font-family: var(--sans-sc-font);
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.4em;
+  color: var(--text-heading);
+}
+
+.theme-switcher .theme-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--sc-font);
+  font-size: 0.85rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.theme-switcher .theme-btn:hover,
+.theme-switcher .theme-btn[aria-pressed="true"] {
+  color: var(--text-heading);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.theme-switcher .sep {
+  margin: 0 0.35em;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+/* ==========================================================================
+   8. Figures, Sidenotes & Granular Captions Engine (Base Standards)
+   ========================================================================== */
+figure {
+  margin: 2.5rem 0;
+  padding: 0;
+  position: relative;
+}
+
+figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Granular Figcaption Sub-Element System --- */
+figcaption {
+  font-family: var(--serif-font);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+figcaption .image-label {
+  font-family: var(--sans-sc-font);
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  font-variant-numeric: oldstyle-nums;
+  margin-right: 0.35em;
+}
+
+figcaption .image-title {
+  font-weight: 500;
+  color: var(--text-heading);
+  margin-right: 0.25em;
+}
+
+figcaption .image-caption {
+  color: var(--text-main);
+}
+
+figcaption .image-credit {
+  font-family: var(--sans-font); /* Clean distinction for photo credits */
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--text-muted);
+  font-style: normal;
+  font-variant-numeric: oldstyle-nums;
+}
+
+/* --- Automated Sidenote Counter Engine & Hidden Inputs --- */
+input.sidenote-toggle,
+input.margin-toggle {
+  display: none;
+}
+
+/* Unnumbered margin toggle inputs hide by default on desktop */
+label.margin-toggle:not(.sidenote-number) {
+  display: none;
+}
+
+/* Sidenote numbers must remain inline for document counter increment */
+.sidenote-number,
+label.margin-toggle.sidenote-number {
+  display: inline;
+  counter-increment: sidenote-counter;
+  font-variant-numeric: oldstyle-nums;
+  font-weight: 600;
+  color: var(--text-heading);
+  vertical-align: super;
+  font-size: 0.75em;
+  line-height: 0;
+}
+
+.sidenote-number::after {
+  content: counter(sidenote-counter);
+}
+
+/* Baseline margin numeral auto-prefix */
+.sidenote::before {
+  content: counter(sidenote-counter) ". ";
+  font-variant-numeric: oldstyle-nums;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+/* Numeral-less Margin Notes Base */
+.marginnote {
+  float: right;
+  clear: right;
+  margin-right: calc(-1 * (var(--margin-width) + var(--margin-gap)));
+  width: var(--margin-width);
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  line-height: 1.38;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+/* ==========================================================================
+   9. Mathematical & Logical Notation (KaTeX & Alegreya Tuning - Base)
+   ========================================================================== */
+.katex-display {
+  margin: 1.8rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.2rem 0;
+}
+
+.katex {
+  font-size: 1.05em;
+}
+
+.katex .mathnormal,
+.katex .mord.text {
+  font-family: var(--serif-font) !important;
+  font-style: italic;
+}
+
+.katex .mord.mordnumber,
+.katex .mord {
+  font-family: var(--serif-font);
+  font-variant-numeric: lining-nums !important;
+}
+
+.katex .mbin,
+.katex .mrel {
+  color: var(--text-heading);
+}
+
+.katex .inline-sc {
+  font-family: var(--sc-font) !important;
+  font-style: normal;
+  font-size: 0.9em;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   10. Analytical Table of Contents / Outline Engine (Base Component)
+   ========================================================================== */
+.entry-toc {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.entry-toc .toc-title {
+  font-family: var(--sans-sc-font); /* Swapped to Alegreya Sans SC */
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.06em;
+  color: var(--text-heading);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.entry-toc ol.toc-list,
+.entry-toc ol.toc-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry-toc ol.toc-sublist {
+  margin-top: 0.25rem;
+  margin-bottom: 0.35rem;
+  padding-left: 1.25rem;
+}
+
+.entry-toc li {
+  margin-bottom: 0.35rem;
+}
+
+.entry-toc li:last-child {
+  margin-bottom: 0;
+}
+
+.entry-toc a {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  column-gap: 0.35rem;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 0.15s ease;
+}
+
+.entry-toc a:hover {
+  color: var(--text-heading);
+}
+
+.entry-toc a:hover .toc-text {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.entry-toc .toc-num {
+  font-family: var(--serif-font);
+  font-variant-numeric: oldstyle-nums;
+  font-weight: 600;
+  color: var(--text-heading);
+  text-align: right;
+  padding-right: 0.2rem;
+}
+
+.entry-toc .toc-text {
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   11. Bibliography & Abbreviations Engine (Base Component)
+   ========================================================================== */
+
+/* --- A. List of Abbreviations (Sigla System) --- */
+.entry-abbreviations {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+dl.abbreviations-list {
+  margin: 1.8rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+dl.abbreviations-list .abbrev-pair {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  column-gap: 1.25rem;
+  align-items: baseline;
+  font-size: 0.925rem;
+  line-height: 1.45;
+}
+
+/* Small-Caps Abbreviation Key */
+dl.abbreviations-list dt {
+  font-family: var(--sans-sc-font);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  text-align: right;
+  user-select: none;
+}
+
+dl.abbreviations-list dd {
+  margin: 0;
+  color: var(--text-main);
+}
+
+dl.abbreviations-list dd cite {
+  font-style: italic;
+  color: var(--text-heading);
+}
+
+dl.abbreviations-list dd .author {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-variant-numeric: oldstyle-nums;
+  margin-left: 0.25em;
+}
+
+/* --- B. Bibliography & Reference Engine --- */
+.entry-bibliography {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+ul.bibliography-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.8rem 0;
+}
+
+ul.bibliography-list > li {
+  margin-bottom: 1.6rem;
+  font-size: 0.925rem;
+  line-height: 1.48;
+  color: var(--text-main);
+}
+
+ul.bibliography-list > li:last-child {
+  margin-bottom: 0;
+}
+
+/* Classical Hanging Indent First-Line */
+ul.bibliography-list .ref-citation {
+  display: block;
+  padding-left: 2rem;
+  text-indent: -2rem;
+  font-variant-numeric: oldstyle-nums;
+}
+
+ul.bibliography-list .ref-citation cite {
+  font-style: italic;
+  color: var(--text-heading);
+}
+
+/* Monospace Code Block for DOI Links */
+ul.bibliography-list .ref-doi {
+  margin-top: 0.35rem;
+  margin-left: 2rem;
+}
+
+ul.bibliography-list .ref-doi a:link,
+ul.bibliography-list .ref-doi a:visited {
+  font-family: var(--mono-font);
+  font-size: 0.8em;
+  color: var(--text-muted);
+  background-color: rgba(0, 0, 0, 0.035);
+  padding: 0.15em 0.45em;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+ul.bibliography-list .ref-doi a:hover,
+ul.bibliography-list .ref-doi a:focus {
+  color: var(--text-heading);
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+/* Sub-Layer In-Column Annotation */
+ul.bibliography-list .ref-annotation {
+  margin-top: 0.4rem;
+  margin-left: 2rem;
+  font-size: 0.85rem;
+  line-height: 1.42;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   12. Tier 1: Wide Desktop (> 1180px) Layout Engine
+   ========================================================================== */
+@media (min-width: 1181px) {
+  .page-wrapper {
+    display: grid;
+    grid-template-columns: 1fr min(52ch, 90vw) var(--margin-width) 1fr;
+    column-gap: var(--margin-gap);
+    padding: 4rem 1.5rem;
+    min-height: 100vh;
+    align-content: start;
+  }
+
+  .text-container {
+    grid-column: 2;
+    position: relative;
+  }
+
+  .site-header {
+    grid-column: 2;
+  }
+
+  .sidenote-number {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .sidenote {
+    float: right;
+    clear: right;
+    margin-right: calc(-1 * (var(--margin-width) + var(--margin-gap)));
+    width: var(--margin-width);
+    font-size: 0.85rem;
+    line-height: 1.38;
+    color: var(--text-muted);
+    font-style: normal;
+    text-align: left;
+  }
+
+  .entry-metadata {
+    position: absolute;
+    top: 0.25rem;
+    left: calc(100% + var(--margin-gap));
+    width: var(--margin-width);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    line-height: 1.38;
+    color: var(--text-muted);
+  }
+
+  .entry-metadata .meta-item {
+    font-variant-numeric: oldstyle-nums;
+  }
+
+  .entry-metadata .meta-label {
+    font-family: var(--sans-sc-font); /* Crisp administrative metadata */
+    font-size: 0.85rem;
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+    margin-right: 0.3em;
+    color: var(--text-heading);
+  }
+
+  .entry-metadata .meta-source {
+    margin-top: 0.5rem;
+  }
+
+  .entry-metadata .meta-source .meta-label {
+    display: block;
+    font-family: var(--sans-sc-font);
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    color: var(--text-heading);
+  }
+
+  .entry-metadata .meta-source .meta-value {
+    display: block;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+  }
+
+  .entry-metadata .meta-source cite {
+    font-style: italic;
+    color: var(--text-heading);
+  }
+
+  .entry-metadata .meta-source time {
+    font-variant-numeric: oldstyle-nums;
+  }
+
+div.epigraph.epigraph-margin > blockquote {
+  position: absolute;
+  left: calc(100% + var(--margin-gap));
+  width: var(--margin-width);
+  margin-left: 0;
+  max-width: none;
+}
+
+  .index-entry {
+    display: grid;
+    grid-template-columns: 1fr var(--margin-width);
+    column-gap: var(--margin-gap);
+    width: calc(100% + var(--margin-width) + var(--margin-gap));
+    align-items: start;
+  }
+
+  .entry-main {
+    grid-column: 1;
+  }
+
+  .entry-margin-meta {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    line-height: 1.38;
+    color: var(--text-muted);
+    padding-top: 0.12rem;
+  }
+
+  .entry-margin-meta .meta-date {
+    font-variant-numeric: oldstyle-nums;
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  .entry-margin-meta .meta-cat {
+    font-family: var(--serif-font);
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--text-muted);
+  }
+
+  .entry-margin-meta .meta-note {
+    font-style: italic;
+    margin-top: 0.25rem;
+    color: var(--text-muted);
+  }
+
+  /* --- 4-Arrangement Figure Engine Rules --- */
+  figure.figure-main {
+    width: 100%;
+    margin: 2.5rem 0;
+  }
+
+  figure.figure-main figcaption {
+    margin-top: 0.75rem;
+    width: 100%;
+  }
+
+  figure.figure-main-margin {
+    margin: 2.5rem 0;
+    display: grid;
+    grid-template-columns: 1fr var(--margin-width);
+    column-gap: var(--margin-gap);
+    width: calc(100% + var(--margin-width) + var(--margin-gap));
+    align-items: end;
+  }
+
+  figure.figure-main-margin img {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  figure.figure-main-margin figcaption {
+    grid-column: 2;
+    margin-bottom: 0;
+  }
+
+  figure.figure-margin {
+    float: right;
+    clear: right;
+    margin-right: calc(-1 * (var(--margin-width) + var(--margin-gap)));
+    width: var(--margin-width);
+    margin-top: 0.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  figure.figure-margin figcaption {
+    margin-top: 0.5rem;
+  }
+
+  figure.figure-full {
+    clear: right;
+    width: 100%;
+    margin: 2.5rem 0;
+  }
+
+  figure.figure-full img {
+    width: calc(100% + var(--margin-width) + var(--margin-gap));
+    max-width: none;
+  }
+
+  figure.figure-full figcaption.caption-main {
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+
+  figure.figure-full figcaption.caption-margin {
+    float: right;
+    clear: right;
+    margin-right: calc(-1 * (var(--margin-width) + var(--margin-gap)));
+    width: var(--margin-width);
+    margin-top: 0.75rem;
+  }
+
+  /* --- Table Full Desktop Rules --- */
+  .table-container.table-full {
+    width: calc(100% + var(--margin-width) + var(--margin-gap));
+    max-width: calc(100% + var(--margin-width) + var(--margin-gap));
+    clear: right;
+    overflow: hidden;
+  }
+
+  .table-container.table-full table {
+    width: 100%;
+    table-layout: auto;
+  }
+
+  .table-full table .col-prose {
+    width: 42%;
+  }
+
+  .table-full table .col-md {
+    width: 25%;
+  }
+
+  /* --- TOC Margin Track Docking --- */
+  .entry-toc {
+    position: absolute;
+    top: 9.5rem;
+    left: calc(100% + var(--margin-gap));
+    width: var(--margin-width);
+    margin: 0;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--border-color);
+  }
+
+  /* --- Footer Grid --- */
+  .site-footer {
+    display: grid;
+    grid-template-columns: 1fr var(--margin-width);
+    column-gap: var(--margin-gap);
+    width: calc(100% + var(--margin-width) + var(--margin-gap));
+    align-items: start;
+  }
+
+  .footer-main {
+    grid-column: 1;
+  }
+
+  .footer-colophon {
+    grid-column: 2;
+    font-size: 0.825rem;
+    line-height: 1.38;
+    color: var(--text-muted);
+    font-variant-numeric: oldstyle-nums;
+  }
+
+  .colophon-title {
+    font-family: var(--sans-sc-font);
+    font-weight: 700;
+    text-transform: lowercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-heading);
+  }
+
+  .footer-colophon p {
+    margin: 0;
+  }
+}
+
+/* ==========================================================================
+   13. Tier 2: Tablet & Mid-Width (641px – 1180px) Layout Engine
+   ========================================================================== */
+@media (min-width: 641px) and (max-width: 1180px) {
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3.5rem 2rem;
+    min-height: 100vh;
+  }
+
+  .text-container,
+  .site-header,
+  .site-footer {
+    width: 100%;
+    max-width: 52ch;
+  }
+
+  .site-header {
+    margin-bottom: 2.5rem;
+  }
+
+  /* Interactive Toggle Markers Parity Engine (Specificity Fix) */
+  .sidenote-number,
+  label.margin-toggle,
+  label.margin-toggle:not(.sidenote-number) {
+    display: inline;
+    color: var(--text-heading);
+    padding: 0 0.25em;
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.15s ease;
+  }
+
+  .sidenote-number:hover,
+  label.margin-toggle:hover {
+    color: var(--text-muted);
+  }
+
+  .sidenote {
+    display: none;
+    float: none;
+    clear: none;
+    margin-right: 0;
+    width: 100%;
+    margin: 0.75rem 0 1rem 0;
+    padding: 0.6rem 0 0.6rem 1rem;
+    border-left: 2px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.015);
+    font-size: 0.875rem;
+    line-height: 1.42;
+    color: var(--text-muted);
+  }
+
+  .sidenote-toggle:checked + .sidenote {
+    display: block;
+  }
+
+  .marginnote {
+    display: none;
+    float: none;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  input.margin-toggle:checked ~ .marginnote {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--text-muted);
+  }
+
+  .entry-metadata {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 0.85rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .entry-metadata .meta-item {
+    font-variant-numeric: oldstyle-nums;
+  }
+
+  .entry-metadata .meta-label {
+    font-family: var(--sc-font);
+    text-transform: lowercase;
+    margin-right: 0.25em;
+    color: var(--text-heading);
+  }
+
+  .entry-margin-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-top: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .entry-margin-meta .meta-date {
+    font-variant-numeric: oldstyle-nums;
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  .entry-margin-meta .meta-cat {
+    font-family: var(--serif-font);
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .entry-margin-meta .meta-note {
+    width: 100%;
+    font-style: italic;
+    margin-top: 0.15rem;
+  }
+
+  figure.figure-main,
+  figure.figure-main-margin,
+  figure.figure-full,
+  figure.figure-margin {
+    display: block;
+    width: 100%;
+    margin: 2rem 0;
+  }
+
+  figure img,
+  figure.figure-full img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  figure figcaption,
+  figure.figure-main-margin figcaption,
+  figure.figure-margin figcaption,
+  figure.figure-full figcaption.caption-main,
+  figure.figure-full figcaption.caption-margin {
+    float: none;
+    clear: none;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    margin-top: 0.6rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .table-container.table-full {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-container.table-full table {
+    width: 100%;
+    min-width: 50rem;
+  }
+
+  table .col-prose {
+    min-width: 20rem;
+  }
+
+  table .col-md {
+    min-width: 11rem;
+  }
+
+  /* --- TOC In-Column Banner Collapse --- */
+  .entry-toc {
+    position: static;
+    width: 100%;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .entry-toc a {
+    grid-template-columns: 2.2rem 1fr;
+    font-size: 0.9rem;
+  }
+
+  .site-footer {
+    margin-top: 5rem;
+    padding-top: 2rem;
+  }
+
+  .footer-colophon {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.85rem;
+  }
+
+  .colophon-title {
+    font-family: var(--sc-font);
+    font-weight: 700;
+    text-transform: lowercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-heading);
+  }
+}
+
+/* ==========================================================================
+   14. Tier 3: Compact Mobile (≤ 640px) Layout Engine
+   ========================================================================== */
+@media (max-width: 640px) {
+  .page-wrapper {
+    display: block;
+    padding: 2rem 1.25rem;
+  }
+
+  .text-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .site-header {
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .site-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .nav-links {
+    gap: 1.25rem;
+  }
+
+  .entry-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .entry-abstract {
+    margin: 2rem 0;
+  }
+
+  /* Interactive Toggle Markers Parity Engine (Specificity Fix) */
+  .sidenote-number,
+  label.margin-toggle,
+  label.margin-toggle:not(.sidenote-number) {
+    display: inline;
+    color: var(--text-heading);
+    padding: 0 0.25em;
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.15s ease;
+  }
+
+  .sidenote-number:hover,
+  label.margin-toggle:hover {
+    color: var(--text-muted);
+  }
+
+  .sidenote {
+    display: none;
+    float: none;
+    clear: none;
+    margin-right: 0;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.42;
+    color: var(--text-muted);
+    padding: 0.6rem 0 0.6rem 1rem;
+    margin: 0.75rem 0;
+    border-left: 2px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.015);
+    text-align: left;
+  }
+
+  .sidenote-toggle:checked + .sidenote {
+    display: block;
+  }
+
+  .marginnote {
+    display: none;
+    float: none;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  input.margin-toggle:checked ~ .marginnote {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--text-muted);
+  }
+
+  .entry-metadata {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .entry-metadata .meta-item {
+    font-variant-numeric: oldstyle-nums;
+  }
+
+  .entry-metadata .meta-label {
+    font-family: var(--sc-font);
+    text-transform: lowercase;
+    margin-right: 0.25em;
+    color: var(--text-heading);
+  }
+
+  .index-intro {
+    margin-bottom: 2.5rem;
+  }
+
+  .index-ledger {
+    gap: 1.25rem;
+  }
+
+  .entry-margin-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    margin-top: 0.35rem;
+    font-size: 0.825rem;
+    color: var(--text-muted);
+  }
+
+  .entry-margin-meta .meta-date {
+    font-variant-numeric: oldstyle-nums;
+    font-weight: 600;
+  }
+
+  .entry-margin-meta .meta-cat {
+    font-family: var(--serif-font);
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .entry-margin-meta .meta-note {
+    display: none;
+  }
+
+  .timeline-ledger .timeline-entry {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .timeline-ledger dt time {
+    text-align: left;
+  }
+
+  blockquote.dialogue .speech {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  blockquote.dialogue .speaker {
+    text-align: left;
+  }
+
+  figure.figure-main,
+  figure.figure-main-margin,
+  figure.figure-full,
+  figure.figure-margin {
+    display: block;
+    width: 100%;
+    margin: 2rem 0;
+  }
+
+  figure img,
+  figure.figure-full img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  figure figcaption,
+  figure.figure-main-margin figcaption,
+  figure.figure-margin figcaption,
+  figure.figure-full figcaption.caption-main,
+  figure.figure-full figcaption.caption-margin {
+    float: none;
+    clear: none;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    margin-top: 0.6rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .table-container.table-full {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-container.table-full table {
+    width: 100%;
+    min-width: 50rem;
+  }
+
+  table .col-prose {
+    min-width: 20rem;
+  }
+
+  table .col-md {
+    min-width: 11rem;
+  }
+
+  /* --- TOC Mobile In-Column Banner --- */
+  .entry-toc {
+    position: static;
+    width: 100%;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .entry-toc a {
+    grid-template-columns: 2.2rem 1fr;
+    font-size: 0.9rem;
+  }
+
+  .site-footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+  }
+
+  .footer-colophon {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.85rem;
+  }
+
+  .colophon-title {
+    font-family: var(--sc-font);
+    font-weight: 700;
+    text-transform: lowercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-heading);
+  }
+}

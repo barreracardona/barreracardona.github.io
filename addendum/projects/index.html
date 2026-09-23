@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyectos — Conceptos y Argumentos</title>
+
+  <link rel="stylesheet" href="../../tufte.css">
+  <!-- KaTeX Minimal Stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <script>
+    (function() {
+      const saved = localStorage.getItem('tufte-theme');
+      if (saved && saved !== 'auto') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    })();
+  </script>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+    
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="../../" class="site-title">Concepts &amp; Arguments</a>
+      <div class="nav-links">
+        <a href="../../">Artículos</a>
+        <a href="../../addendum/about/">Quién soy</a>
+      </div>
+    </nav>
+  </header>
+
+    <main class="text-container">
+      
+      <header class="entry-header">
+        <h1 class="entry-title"><em>Proyectos</em></h1>
+      
+        <div class="entry-metadata">
+          <div class="meta-item"><span class="meta-label">updated:</span> 2026-09-17</div>
+          <div class="meta-item"><span class="meta-label">location:</span> Cali, COL</div>
+          <div class="meta-item"><span class="meta-label">focus:</span> Ethics and Philosophy of Mind</div>
+        </div>
+      </header>
+
+<div class="epigraph">
+  <blockquote>
+    <p>
+      <q>Creo que sólo hay un camino hacia la ciencia -o hacia la filosofía, si vamos al caso-: encontrar un problema, ver su belleza y enamorarse de él; casarse con él, y vivir con él felizmente, hasta que la muerte os separe</q>
+    </p>
+    <footer>
+      &mdash; <span class="author">Karl Popper</span>,
+
+      <q>Preface, 1956. On the non-existence of scientific method</q>, en <cite>Realism and the Aim of Science. From the Postscript to the Logic of Scientific Discovery</cite>, editado por W. W. Bartley, III (Rowman and Littlefield, 1983), p.&nbsp;8.
+    </footer>
+  </blockquote>
+</div>
+
+      <p>This page serves as a public workbench—a current snapshot of active macro-projects, ongoing intellectual inquiries, and the books open on my table.</p>
+
+<p>The design system relies on clean, semantic <abbr title="HyperText Markup Language">HTML</abbr> to maintain complete separation between content and visual structure.</p>
+
+  <blockquote>
+    <p>Typography exists to honor content. A text rendered without typographic discipline is merely noise given form.</p>
+  </blockquote>
+
+      <h2>Active Projects</h2>
+      
+      <h3>Disagreement, rationality and agnosticism</h3>
+
+      <p>Developing a minimalist web publishing system built on strict typographic rules, asymmetric grid architecture, and pure <span class="inline-sc">CSS</span> primitives<label for="sn-1" class="sidenote-number">1</label><input type="checkbox" id="sn-1" class="sidenote-toggle"><small class="sidenote"><span class="sidenote-num">1.</span> Status: Checkpoint 2 locked. Refining single-page content primitives.</small>. The goal is complete elimination of framework overhead.</p>
+
+      <h3>Self-knowledge, open-mindedness, and epistemic virtues</h3>
+
+      <p>Constructing a continuous index architecture that merges bibliographic cataloging with editorial publishing, removing traditional artificial pagination and heavy annual grouping banners.</p>
+
+
+      <h3>Thought Experiments, Imagination and Intuition</h3>
+
+      <h2>on the workbench</h2>
+      <p>Currently exploring dynamic vertical rhythm engines using pure <span class="inline-sc">CSS</span> selectors like <code>:has()</code> to adjust document flow automatically based on marginal metadata density.</p>
+
+      <h3>Folk psychology, pseudoscience and science communication</h3>
+
+
+      <h3>Traditions, systems, and schools of thought in the history of psychology</h3>
+
+      <h2>books on the desk</h2>
+      <p>Reading, annotating, and referencing the following physical volumes:</p>
+      
+      <p>Tufte, E. R. — <em>Envisioning Information</em><label for="sn-2" class="sidenote-number">2</label><input type="checkbox" id="sn-2" class="sidenote-toggle"><small class="sidenote"><span class="sidenote-num">2.</span> Graphics Press, 1990. Chapter 4: Micro/Macro Readings.</small></p>
+      
+      <p>Bringhurst, R. — <em>The Elements of Typographic Style</em><label for="sn-3" class="sidenote-number">3</label><input type="checkbox" id="sn-3" class="sidenote-toggle"><small class="sidenote"><span class="sidenote-num">3.</span> Hartley &amp; Marks, 4th ed. Chapter 2: Rhythm &amp; Proportion.</small></p>
+<footer class="site-footer">
+      <div class="footer-main">
+        <a href="../../" class="back-to-index">← Volver a la lista de publicaciones</a>
+        <p class="footer-copy">Archivo personal de escritos sobre psicología, filosofía y otras disciplinas afines.</p>
+      </div>
+      <div class="footer-colophon">
+        <span class="colophon-title">Colofón</span>
+        <p>Compuesto en Alegreya.</p>
+
+        <p><em>Por Brian Barrera</em>&ensp;&copy; 2026.</p>
+
+        <div class="theme-switcher">
+              <span class="switcher-label">Tema:</span>
+              <button type="button" class="theme-btn" data-set-theme="auto">auto</button>
+              <span class="sep">·</span>
+              <button type="button" class="theme-btn" data-set-theme="light">light</button>
+              <span class="sep">·</span>
+              <button type="button" class="theme-btn" data-set-theme="sepia">sepia</button>
+              <span class="sep">·</span>
+              <button type="button" class="theme-btn" data-set-theme="dark">dark</button>
+            </div>        
+      </div>    
+</footer>
+</main>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('[data-set-theme]');
+    const currentTheme = localStorage.getItem('tufte-theme') || 'auto';
+
+    function updateActiveState(activeTheme) {
+      buttons.forEach(btn => {
+        const isMatch = btn.getAttribute('data-set-theme') === activeTheme;
+        btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-set-theme');
+        if (theme === 'auto') {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.removeItem('tufte-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('tufte-theme', theme);
+        }
+        updateActiveState(theme);
+      });
+    });
+
+    updateActiveState(currentTheme);
+  });
+</script>
+
+<!-- KaTeX Engine & Auto-Render Extension -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false}
+    ],
+    throwOnError: false
+  });">
+</script>
+</body>
+</html>

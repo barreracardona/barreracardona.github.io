@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quién soy — Conceptos y Argumentos</title>
+
+  <link rel="stylesheet" href="../../tufte.css">
+  <!-- KaTeX Minimal Stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <script>
+    (function() {
+      const saved = localStorage.getItem('tufte-theme');
+      if (saved && saved !== 'auto') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    })();
+  </script>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+    
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="../../" class="site-title">Conceptos &amp; Argumentos</a>
+      <div class="nav-links">
+        <a href="../../">Artículos</a>
+        <a href="../../addendum/projects/">Proyectos</a>
+      </div>
+    </nav>
+  </header>
+
+    <main class="text-container">
+      
+      <header class="entry-header">
+        <h1 class="entry-title"><em>Quién soy</em></h1>
+        
+        <div class="entry-metadata">
+          <div class="meta-item"><span class="meta-label">Autor:</span>Brian Barrera</div>
+          <div class="meta-item"><span class="meta-label">E-mail:</span> <a href="mailto:barreracardona17@gmail.com">barreracardona17@gmail.com</a></div>
+        </div>
+      </header>
+
+<div class="epigraph">
+  <blockquote>
+    <p>
+      <q>Nunca rechaces nada. Nada está demostrado. Si rechazas algo, será el principio de tu fin como intelectual</q>
+    </p>
+    <footer>
+      &mdash; <span class="author">William James</span> <em>apud</em> Gertrude Stein, en James R. Mellow, <cite>Charmed Circle: Gertrude Stein and Company</cite> (Praeger, <time>1974</time>), p.&nbsp;34.
+    </footer>
+  </blockquote>
+</div>
+
+      <p>Soy investigador independiente. Este espacio funciona como un archivo público de algunas de las cosas que he escrito. Estudié psicología y filosofía profesional en la Universidad del Valle. Creo en la web estática como un medio para la lectura sosegada, alejada del ruido de las plataformas contemporáneas y las redes sociales. Hasta ahora, esta es solo una prueba de cómo se vería el sitio, y este es solo un texto de relleno.</p>
+
+    <h2>Biblioteca de referencia</h2>
+
+    <p>Una selección de textos fundamentales que informan mi pensamiento, han marcado mi vida, y por tanto guían también este espacio:</p>
+    
+    <ul class="site-list">
+      <li><cite>La sociedad abierta y sus enemigos</cite>, Karl Popper.</li>
+      <li><cite>Sobre la libertad</cite>, Isaiah Berlin.</li>
+      <li><cite>Diálogos sobre religión natural</cite>, David Hume.</li>
+      <li><cite>La voluntad de creer</cite>, William James.</li>
+    </ul>
+<footer class="site-footer">
+      <div class="footer-main">
+        <a href="../../" class="back-to-index">← Volver a la lista de publicaciones</a>
+        <p class="footer-copy">Archivo personal de escritos sobre psicología, filosofía y otras disciplinas afines.</p>
+      </div>
+      <div class="footer-colophon">
+        <span class="colophon-title">Colofón</span>
+        <p>Compuesto en Alegreya.</p>
+
+        <p><em>Por Brian Barrera</em>&ensp;&copy; 2026.</p>
+
+        <div class="theme-switcher">
+              <span class="switcher-label">Tema:</span>
+              <button type="button" class="theme-btn" data-set-theme="auto">auto</button>
+              <span class="sep">·</span>
+              <button type="button" class="theme-btn" data-set-theme="light">light</button>
+              <span class="sep">·</span>
+              <button type="button" class="theme-btn" data-set-theme="sepia">sepia</button>
+              <span class="sep">·</span>
+              <button type="button" class="theme-btn" data-set-theme="dark">dark</button>
+            </div>        
+      </div>    
+</footer>
+</main>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('[data-set-theme]');
+    const currentTheme = localStorage.getItem('tufte-theme') || 'auto';
+
+    function updateActiveState(activeTheme) {
+      buttons.forEach(btn => {
+        const isMatch = btn.getAttribute('data-set-theme') === activeTheme;
+        btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-set-theme');
+        if (theme === 'auto') {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.removeItem('tufte-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('tufte-theme', theme);
+        }
+        updateActiveState(theme);
+      });
+    });
+
+    updateActiveState(currentTheme);
+  });
+</script>
+
+<!-- KaTeX Engine & Auto-Render Extension -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false}
+    ],
+    throwOnError: false
+  });">
+</script>
+</body>
+</html>
