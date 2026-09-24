@@ -144,6 +144,16 @@ code, kbd {
   border-radius: 2px;
 }
 
+code em,
+code i {
+  font-style: italic;
+}
+
+code strong,
+code b {
+  font-weight: 700;
+}
+
 pre {
   font-family: var(--mono-font);
   font-size: 0.85rem;
@@ -196,6 +206,36 @@ hr {
   border: 0;
   border-top: 1px solid var(--border-color);
   margin: 3rem 0;
+}
+
+/* --- Line-Height Protection for Subscripts & Superscripts --- */
+sub,
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* Elevate Superscripts */
+sup {
+  top: -0.42em;
+}
+
+/* Lower Subscripts */
+sub {
+  bottom: -0.2em;
+}
+
+/* --- Spanish Ordinal Indicator (Letra Volada) --- */
+.ord,
+sup.ord {
+  font-size: 0.68em;
+  line-height: 0;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+  margin-left: 0.02em; /* Micro-spacing after the period */
 }
 
 /* ==========================================================================
@@ -443,6 +483,60 @@ ol.site-list > li > ul.site-list,
 ol.site-list > li > ol.site-list {
   grid-column: 2;
   margin: 0.5rem 0 0 0;
+}
+
+/* --- Adaptive Logical Argument Engine --- */
+.logical-argument {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  width: fit-content;      /* Shrink-wraps to fit short formulas */
+  max-width: 100%;         /* Prevents overflow on long prose premises */
+  column-gap: 1.2rem;
+  row-gap: 0.4rem;
+  align-items: baseline;   /* Pins labels to line 1 of multi-line premises */
+  margin: 1.8rem 0 1.8rem 2rem; /* Indented left margin for classical alignment */
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Premise Labels */
+.logical-argument .arg-label {
+  font-family: var(--sans-sc-font);
+  font-weight: 700;
+  font-size: 0.85em;
+  color: var(--text-muted);
+  text-align: right;
+  white-space: nowrap;
+  user-select: none;
+  letter-spacing: 0.04em;
+}
+
+/* Premise Text */
+.logical-argument .arg-text {
+  color: var(--text-main);
+  font-variant-numeric: oldstyle-nums;
+}
+
+/* Horizontal Inference Line (Adapts precisely to argument width) */
+.logical-argument .inference-line {
+  grid-column: 1 / -1;
+  height: 1px;
+  background-color: var(--text-heading);
+  margin: 0.2rem 0 0.3rem 0;
+  opacity: 0.35;
+}
+
+/* Conclusion Row */
+.logical-argument .arg-label.conclusion-label {
+  font-family: var(--serif-font);
+  font-size: 1.15em;
+  font-weight: bold;
+  color: var(--text-heading);
+}
+
+.logical-argument .arg-text.conclusion-text {
+  font-weight: 500;
+  color: var(--text-heading);
 }
 
 /* ==========================================================================
@@ -938,6 +1032,36 @@ label.margin-toggle.sidenote-number {
 /* ==========================================================================
    9. Mathematical & Logical Notation (KaTeX & Alegreya Tuning - Base)
    ========================================================================== */
+/* --- LaTeX Logo Typography --- */
+.latex {
+  font-family: var(--serif-font); /* Leverages your font stack (e.g., Alegreya) */
+  font-weight: normal;
+}
+
+/* Raised Small-Cap "A" */
+.latex .latex-a {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  vertical-align: 0.28em;
+  margin-left: -0.28em;
+  margin-right: -0.12em;
+  line-height: 0;
+}
+
+/* Lowered "E" */
+.latex .latex-e {
+  font-size: 1em;
+  text-transform: uppercase;
+  vertical-align: -0.2em;
+  margin-left: -0.16em;
+  margin-right: -0.12em;
+  line-height: 0;
+}
+
+.katex {
+  font-size: 0.92em; /* Scales down inline math to blend with Alegreya's x-height */
+}
+
 .katex-display {
   margin: 1.8rem 0;
   overflow-x: auto;
@@ -945,8 +1069,21 @@ label.margin-toggle.sidenote-number {
   padding: 0.2rem 0;
 }
 
-.katex {
+/* Restores scale for standalone, centered equation blocks */
+.katex-display .katex {
   font-size: 1.05em;
+}
+
+/* --- Strict Optical Harmonization & Non-Breaking Inline Math --- */
+span.katex {
+  font-size: 0.83em !important; /* Scales symbols to match Alegreya cap-height */
+  white-space: nowrap;          /* Keeps inline formulas intact on a single line */
+}
+
+/* Preserves full scale and layout for standalone display blocks */
+.katex-display span.katex {
+  font-size: 1.05em !important;
+  white-space: normal;
 }
 
 .katex .mathnormal,
